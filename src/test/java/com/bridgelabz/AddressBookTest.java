@@ -61,4 +61,20 @@ public class AddressBookTest {
         }
         Assert.assertEquals(4,countContactByState);
     }
+
+    @Test
+    public void givenNewContactShouldReturnTotalRowsCount(){
+        Connection conn = null;
+        Statement stmt = null;
+        int totalRowsCount = 0;
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            totalRowsCount = AddressBookUsingJdbc.insertNewContact(stmt);
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+        Assert.assertEquals(7,totalRowsCount);
+    }
 }

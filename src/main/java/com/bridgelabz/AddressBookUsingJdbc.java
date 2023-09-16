@@ -88,4 +88,22 @@ public class AddressBookUsingJdbc {
         }
         return contactsCount;
     }
+
+    public static int insertNewContact(Statement stmt){
+        int totalRowCount = 0;
+        try {
+            String insertNewContact = "INSERT INTO address_book (firstName, lastName, address, city, state, zip, phoneNumber, email, contactType) " +
+                    "VALUES ('Akshata', 'Joshi', 'street22', 'mumbai', 'MH', 598909, 7655621100, 'aks@gmail.com','family')";
+            stmt.executeUpdate(insertNewContact); //for insert new contact
+
+            String displayTable = "SELECT * FROM address_book";
+            ResultSet rs = stmt.executeQuery(displayTable); //for count rows
+            while (rs.next()) {
+                totalRowCount++;
+            }
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return totalRowCount;
+    }
 }
