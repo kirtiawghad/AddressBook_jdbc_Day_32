@@ -45,4 +45,20 @@ public class AddressBookTest {
         Assert.assertEquals(1,countContactByCity);
 
     }
+
+    @Test
+    public void givenSearchByStateQueryShouldReturnContactsCount(){
+        Connection conn = null;
+        Statement stmt = null;
+        int countContactByState = 0;
+        try {
+            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            stmt = conn.createStatement();
+
+            countContactByState = AddressBookUsingJdbc.getContactsByState(stmt);
+        }catch (SQLException e){
+            System.out.println(e);
+        }
+        Assert.assertEquals(4,countContactByState);
+    }
 }
